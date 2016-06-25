@@ -8,6 +8,9 @@ import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.RandomDice;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * User: your name
  */
@@ -15,7 +18,7 @@ public class YourSolver implements Solver<Board> {
 
     private static final String USER_NAME = "artemyankovets@gmail.com";
 
-    private Dice dice;
+    private final Dice dice;
     private Board board;
 
     public YourSolver(Dice dice) {
@@ -25,36 +28,48 @@ public class YourSolver implements Solver<Board> {
     @Override
     public String get(Board board) {
         this.board = board;
-
         Point apple = board.getApples().get(0);
-        Point snake_head = board.getHead();
+        Point head = board.getHead();
 
-        int dx = snake_head.getX() - apple.getX();
-        int dy = snake_head.getY() - apple.getY();
+        return getDirection(head, apple).toString();
+    }
 
-        String direction = Direction.UP.toString();
+    private Direction getDirection(Point head, Point apple) {
+        int dx = head.getX() - apple.getX();
+        int dy = head.getY() - apple.getY();
 
-        if (dx < 0) {
-            direction = Direction.RIGHT.toString();
-        }
+        LinkedList<Direction> directions = getDirections(dx, dy);
 
-        if (dx > 0) {
-            direction = Direction.LEFT.toString();
-        }
-
-        if (dy < 0) {
-            direction = Direction.DOWN.toString();
-        }
-
-        if (dy > 0) {
-            direction = Direction.UP.toString();
+        Direction direction = directions.getFirst();
+        if (directions.size() == 2) {
+            if (board.isTailOn(head, direction)) {
+                // то выбрать второй вариант
+                direction = directions.getLast();
+            }
         }
 
         return direction;
     }
 
+    private LinkedList<Direction> getDirections(int dx, int dy) {
+        List<Direction> result = new LinkedList<>();
+        if (dx < 0) {
+            result.add(Direction.RIGHT);
+        }
+        if (dx > 0) {
+            result.add(Direction.LEFT);
+        }
+        if (dy < 0) {
+            result.add(Direction.DOWN);
+        }
+        if (dy > 0) {
+            result.add(Direction.UP);
+        }
+        return (LinkedList<Direction>) result;
+    }
+
     public static void main(String[] args) {
-        start(USER_NAME, WebSocketRunner.Host.REMOTE);
+        YourSolver.start(YourSolver.USER_NAME, WebSocketRunner.Host.REMOTE);
     }
 
     public static void start(String name, WebSocketRunner.Host server) {

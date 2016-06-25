@@ -19,16 +19,16 @@ public class Board extends AbstractBoard<Elements> {
     }
 
     public List<Point> getApples() {
-        return get(Elements.GOOD_APPLE);
+        return this.get(Elements.GOOD_APPLE);
     }
 
     public Direction getSnakeDirection() {
-        Point head = getHead();
-        if (isAt(head.getX(), head.getY(), Elements.HEAD_LEFT)) {
+        Point head = this.getHead();
+        if (this.isAt(head.getX(), head.getY(), Elements.HEAD_LEFT)) {
             return Direction.LEFT;
-        } else if (isAt(head.getX(), head.getY(), Elements.HEAD_RIGHT)) {
+        } else if (this.isAt(head.getX(), head.getY(), Elements.HEAD_RIGHT)) {
             return Direction.RIGHT;
-        } else if (isAt(head.getX(), head.getY(), Elements.HEAD_UP)) {
+        } else if (this.isAt(head.getX(), head.getY(), Elements.HEAD_UP)) {
             return Direction.UP;
         } else {
             return Direction.DOWN;
@@ -36,7 +36,7 @@ public class Board extends AbstractBoard<Elements> {
     }
 
     public Point getHead() {
-        List<Point> result = get(
+        List<Point> result = this.get(
                 Elements.HEAD_UP,
                 Elements.HEAD_DOWN,
                 Elements.HEAD_LEFT,
@@ -45,14 +45,14 @@ public class Board extends AbstractBoard<Elements> {
     }
 
     public List<Point> getBarriers() {
-        List<Point> result = getSnake();
-        result.addAll(getStones());
-        result.addAll(getWalls());
+        List<Point> result = this.getSnake();
+        result.addAll(this.getStones());
+        result.addAll(this.getWalls());
         return result;
     }
 
     public List<Point> getSnake() {
-        List<Point> result = get(
+        List<Point> result = this.get(
                 Elements.TAIL_END_DOWN,
                 Elements.TAIL_END_LEFT,
                 Elements.TAIL_END_UP,
@@ -63,7 +63,7 @@ public class Board extends AbstractBoard<Elements> {
                 Elements.TAIL_LEFT_UP,
                 Elements.TAIL_RIGHT_DOWN,
                 Elements.TAIL_RIGHT_UP);
-        result.add(0, getHead());
+        result.add(0, this.getHead());
         return result;
     }
 
@@ -75,19 +75,25 @@ public class Board extends AbstractBoard<Elements> {
             "Head at: %s\n" +
             "Snake at: %s\n" +
             "Current direction: %s",
-                boardAsString(),
-                getApples(),
-                getStones(),
-                getHead(),
-                getSnake(),
-                getSnakeDirection());
+                this.boardAsString(),
+                this.getApples(),
+                this.getStones(),
+                this.getHead(),
+                this.getSnake(),
+                this.getSnakeDirection());
     }
 
     public List<Point> getStones() {
-        return get(Elements.BAD_APPLE);
+        return this.get(Elements.BAD_APPLE);
     }
 
     public List<Point> getWalls() {
-        return get(Elements.BREAK);
+        return this.get(Elements.BREAK);
+    }
+
+    public boolean isTailOn(Point from, Direction direction) {
+        List<Point> snake = getSnake();
+        Point point = direction.change(from);
+        return snake.contains(point);
     }
 }

@@ -9,28 +9,31 @@ public class YourSolverTest {
     @Test
     public void TestSameDirection(){
 
-        assertB("☼☼☼☼☼☼\n" +
+        this.assertB(
+                "☼☼☼☼☼☼\n" +
                 "☼    ☼\n" +
                 "☼ ▼  ☼\n" +
                 "☼    ☼\n" +
                 "☼ ☺  ☼\n" +
                 "☼☼☼☼☼☼\n", "DOWN");
 
-        assertB("☼☼☼☼☼☼\n" +
+        this.assertB(
+                "☼☼☼☼☼☼\n" +
                 "☼    ☼\n" +
                 "☼    ☼\n" +
                 "☼► ☺ ☼\n" +
                 "☼    ☼\n" +
                 "☼☼☼☼☼☼\n", "RIGHT");
 
-        assertB("☼☼☼☼☼☼\n" +
+        this.assertB("☼☼☼☼☼☼\n" +
                 "☼    ☼\n" +
                 "☼ ☺  ☼\n" +
                 "☼    ☼\n" +
                 "☼ ▲  ☼\n" +
                 "☼☼☼☼☼☼\n", "UP");
 
-        assertB("☼☼☼☼☼☼\n" +
+        this.assertB(
+                "☼☼☼☼☼☼\n" +
                 "☼    ☼\n" +
                 "☼☺  ◄☼\n" +
                 "☼    ☼\n" +
@@ -41,33 +44,124 @@ public class YourSolverTest {
     @Test
     public void TestNotSameDirection(){
 
-        assertB("☼☼☼☼☼☼\n" +
+        this.assertB(
+                "☼☼☼☼☼☼\n" +
                 "☼    ☼\n" +
                 "☼ ►  ☼\n" +
                 "☼    ☼\n" +
                 "☼ ☺  ☼\n" +
                 "☼☼☼☼☼☼\n", "DOWN");
 
-        assertB("☼☼☼☼☼☼\n" +
+        this.assertB(
+                "☼☼☼☼☼☼\n" +
                 "☼    ☼\n" +
                 "☼    ☼\n" +
                 "☼▼ ☺ ☼\n" +
                 "☼    ☼\n" +
                 "☼☼☼☼☼☼\n", "RIGHT");
 
-        assertB("☼☼☼☼☼☼\n" +
+        this.assertB("☼☼☼☼☼☼\n" +
                 "☼    ☼\n" +
                 "☼ ☺  ☼\n" +
                 "☼    ☼\n" +
                 "☼ ►  ☼\n" +
                 "☼☼☼☼☼☼\n", "UP");
 
-        assertB("☼☼☼☼☼☼\n" +
+        this.assertB(
+                "☼☼☼☼☼☼\n" +
                 "☼    ☼\n" +
                 "☼☺  ►☼\n" +
                 "☼    ☼\n" +
                 "☼    ☼\n" +
                 "☼☼☼☼☼☼\n", "LEFT");
+    }
+
+    @Test
+    public void testEatMe_LEFT_DOWN_1(){
+        assertB(
+                "☼☼☼☼☼☼\n" +
+                "☼    ☼\n" +
+                "☼╘═► ☼\n" +
+                "☼ ☺  ☼\n" +
+                "☼    ☼\n" +
+                "☼☼☼☼☼☼\n", "DOWN");
+    }
+
+    @Test
+    public void testEatMe_LEFT_DOWN_2(){
+        assertB(
+                "☼☼☼☼☼☼\n" +
+                "☼    ☼\n" +
+                "☼  ▲ ☼\n" +
+                "☼ ☺║ ☼\n" +
+                "☼  ╙ ☼\n" +
+                "☼☼☼☼☼☼\n", "LEFT");
+    }
+
+    @Test
+    public void testEatMe_LEFT_UP_1(){
+        assertB(
+                "☼☼☼☼☼☼\n" +
+                "☼    ☼\n" +
+                "☼ ☺  ☼\n" +
+                "☼╘═► ☼\n" +
+                "☼    ☼\n" +
+                "☼☼☼☼☼☼\n", "UP");
+    }
+
+    @Test
+    public void testEatMe_LEFT_UP_2(){
+        assertB(
+                "☼☼☼☼☼☼\n" +
+                "☼    ☼\n" +
+                "☼  ╓ ☼\n" +
+                "☼ ☺║ ☼\n" +
+                "☼  ▼ ☼\n" +
+                "☼☼☼☼☼☼\n", "LEFT");
+    }
+
+    @Test
+    public void testEatMe_RIGHT_DOWN_1(){
+        assertB(
+                "☼☼☼☼☼☼\n" +
+                "☼    ☼\n" +
+                "☼◄═╕ ☼\n" +
+                "☼ ☺  ☼\n" +
+                "☼    ☼\n" +
+                "☼☼☼☼☼☼\n", "DOWN");
+    }
+
+    @Test
+    public void testEatMe_RIGHT_DOWN_2(){
+        assertB(
+                "☼☼☼☼☼☼\n" +
+                "☼    ☼\n" +
+                "☼ ▲  ☼\n" +
+                "☼ ║☺ ☼\n" +
+                "☼ ╙  ☼\n" +
+                "☼☼☼☼☼☼\n", "RIGHT");
+    }
+
+    @Test
+    public void testEatMe_RIGHT_UP_1(){
+        assertB(
+                "☼☼☼☼☼☼\n" +
+                "☼    ☼\n" +
+                "☼ ☺  ☼\n" +
+                "☼◄═╕ ☼\n" +
+                "☼    ☼\n" +
+                "☼☼☼☼☼☼\n", "UP");
+    }
+
+    @Test
+    public void testEatMe_RIGHT_UP_2(){
+        assertB(
+                "☼☼☼☼☼☼\n" +
+                "☼    ☼\n" +
+                "☼ ╓  ☼\n" +
+                "☼ ║☺ ☼\n" +
+                "☼ ▼  ☼\n" +
+                "☼☼☼☼☼☼\n", "RIGHT");
     }
 
     private void assertB(String boardString, String expected) {
