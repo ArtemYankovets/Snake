@@ -41,7 +41,8 @@ public class YourSolver implements Solver<Board> {
         LinkedList<Direction> directions = getDirections(dx, dy);
 
         Direction direction = directions.getFirst();
-        if (!board.isTailOn(head, direction)) {
+        if (!board.isTailOn(head, direction) &&
+            !board.isStoneOn(head, direction)) {
             return direction;
         }
 

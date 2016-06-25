@@ -1,7 +1,6 @@
 package com.codenjoy.dojo.snake.client;
 
 import com.codenjoy.dojo.services.RandomDice;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -191,15 +190,44 @@ public class YourSolverTest {
                 "☼☼☼☼☼☼\n", "DOWN");
     }
 
-    @Ignore
     @Test
-    public void testEatStone() {
-        assertB("☼☼☼☼☼☼" +
-                "☼╔╕  ☼" +
-                "☼▼   ☼" +
-                "☼☻   ☼" +
-                "☼☺   ☼" +
-                "☼☼☼☼☼☼", "LEFT");
+    public void testDontEatStone_DOWN() {
+        assertB("☼☼☼☼☼☼\n" +
+                "☼ ╓  ☼\n" +
+                "☼ ▼  ☼\n" +
+                "☼ ☻  ☼\n" +
+                "☼ ☺  ☼\n" +
+                "☼☼☼☼☼☼\n", "LEFT");
+    }
+
+    @Test
+    public void testDontEatStone_UP() {
+        assertB("☼☼☼☼☼☼\n" +
+                "☼ ☺  ☼\n" +
+                "☼ ☻  ☼\n" +
+                "☼ ▲  ☼\n" +
+                "☼ ╙  ☼\n" +
+                "☼☼☼☼☼☼\n", "RIGHT");
+    }
+
+    @Test
+    public void testDontEatStone_LEFT() {
+        assertB("☼☼☼☼☼☼\n" +
+                "☼    ☼\n" +
+                "☼    ☼\n" +
+                "☼☺☻◄╕☼\n" +
+                "☼    ☼\n" +
+                "☼☼☼☼☼☼\n", "UP");
+    }
+
+    @Test
+    public void testDontEatStone_RIGHT() {
+        assertB("☼☼☼☼☼☼\n" +
+                "☼    ☼\n" +
+                "☼    ☼\n" +
+                "☼╘►☻☺☼\n" +
+                "☼    ☼\n" +
+                "☼☼☼☼☼☼\n", "DOWN");
     }
 
     private void assertB(String boardString, String expected) {

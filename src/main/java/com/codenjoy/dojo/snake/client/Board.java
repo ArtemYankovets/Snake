@@ -96,4 +96,11 @@ public class Board extends AbstractBoard<Elements> {
         Point point = direction.change(from);
         return snake.contains(point);
     }
+
+    // TODO remove copy-past
+    public boolean isStoneOn(Point from, Direction direction) {
+        List<Point> snake = getStones();
+        Point point = direction.change(from);
+        return snake.contains(point);
+    }
 }
