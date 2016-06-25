@@ -46,6 +46,16 @@ public class YourSolver implements Solver<Board> {
                 // то выбрать второй вариант
                 direction = directions.getLast();
             }
+        } else {
+            if (board.isTailOn(head, direction)) {
+                //развернуться через одну из сторон
+                Direction actual = board.getSnakeDirection();
+                // вверх-вниз разворот через лево-право
+                // лево-право разворот через вверх-низ
+                // берем текущую и разворачиваем по часовой стрелке
+                direction = actual.clockwise();
+
+            }
         }
 
         return direction;
