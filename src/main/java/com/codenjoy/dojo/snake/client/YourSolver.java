@@ -41,24 +41,15 @@ public class YourSolver implements Solver<Board> {
         LinkedList<Direction> directions = getDirections(dx, dy);
 
         Direction direction = directions.getFirst();
-        if (directions.size() == 2) {
-            if (board.isTailOn(head, direction)) {
-                // то выбрать второй вариант
-                direction = directions.getLast();
-            }
-        } else {
-            if (board.isTailOn(head, direction)) {
-                //развернуться через одну из сторон
-                Direction actual = board.getSnakeDirection();
-                // вверх-вниз разворот через лево-право
-                // лево-право разворот через вверх-низ
-                // берем текущую и разворачиваем по часовой стрелке
-                direction = actual.clockwise();
-
-            }
+        if (!board.isTailOn(head, direction)) {
+            return direction;
         }
 
-        return direction;
+        if (directions.size() == 1) {
+            return board.getSnakeDirection().clockwise();
+        }
+
+        return directions.getLast();
     }
 
     private LinkedList<Direction> getDirections(int dx, int dy) {
